@@ -62,10 +62,11 @@ public class MyStack {
     private int pop() {
         // TODO: Please pop one element from the array.
         // <--start
-        count--;
-        return storage[count];
+        if (count > 0) {
+            return storage[--count];
+        }
         // --end-->
 
-//        throw new UnsupportedOperationException("Stack is empty.");
+        throw new UnsupportedOperationException("Stack is empty.");
     }
 }
