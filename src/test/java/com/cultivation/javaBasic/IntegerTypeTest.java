@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IntegerTypeTest {
 
@@ -21,6 +22,20 @@ class IntegerTypeTest {
 
         assertEquals(maximumSymbol, maximum);
         assertEquals(minimumSymbol, minimum);
+    }
+
+    @Test
+    void should_be_negative() {
+        for (int i = 0x80000000; i <= 0xffffffff; i++) {
+            assertTrue(i < 0);
+        }
+
+        int j=0x0000_0001;
+        for (int i = 0; i <31 ; i++) {
+            assertTrue(j<<i>0);
+        }
+        assertTrue(j<<31<0);
+        System.out.println(0x8000_0000>>1==0xc000_0000);
     }
 
     @Test
@@ -137,6 +152,11 @@ class IntegerTypeTest {
     }
 
     @Test
+    void should_truncate_sign() {
+        assertEquals((short)0x8000_0000,(short) 0x0000);
+    }
+
+    @Test
     void should_increment() {
         int integer = 3;
 
@@ -171,9 +191,10 @@ class IntegerTypeTest {
     private int add(int left, int right) {
         // TODO: Please implement the method. Adding two numbers.
         // The method should throw ArithmeticException if overflow or underflow happens.
-        if ((long) left + (long) right > Integer.MAX_VALUE || (long) left + (long) right < Integer.MIN_VALUE)
-            throw new ArithmeticException();
-        return left + right;
+//        if ((long) left + (long) right > Integer.MAX_VALUE || (long) left + (long) right < Integer.MIN_VALUE)
+//            throw new ArithmeticException();
+//        return left + right;
+        return Math.addExact(left,right);
     }
 
     /*

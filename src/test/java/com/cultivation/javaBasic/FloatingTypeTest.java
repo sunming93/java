@@ -21,6 +21,54 @@ class FloatingTypeTest {
         assertEquals(expected, integer);
     }
 
+    @Test
+    void should_transite() {
+        byte byteNum=0;
+        short shortNum=1;
+        int intNum=2;
+        long longNum=3;
+        float floatNum=4.1f;
+        double doubleNum=5.1;
+
+        byte byteNum1=(byte) shortNum;
+        byte byteNum2=(byte) intNum;
+        byte byteNum3=(byte) longNum;
+        byte byteNum4=(byte) floatNum;
+        byte byteNum5=(byte) doubleNum;
+
+        short shortNum1=byteNum;
+        short shortNum2=(short) intNum;
+        short shortNum3=(short) intNum;
+        short shortNum4=(short) intNum;
+        short shortNum5=(short) intNum;
+
+        int intNum1=byteNum;
+        int intNum2=shortNum;
+        int intNum3=(int) longNum;
+        int intNum4=(int)floatNum;
+        int intNum5=(int)doubleNum;
+
+        long longNum1=byteNum;
+        long longNum2=shortNum;
+        long longNum3=intNum;
+        long longNum4=(long) floatNum;
+        long longNum5=(long) doubleNum;
+
+        float floatNum1=byteNum;
+        float floatNum2=shortNum;
+        float floatNum3=intNum;
+        float floatNum4=longNum;
+        float floatNum5=(float) doubleNum;
+
+
+        double doubleNum1=byteNum;
+        double doubleNum2=shortNum;
+        double doubleNum3=intNum;
+        double doubleNum4=longNum;
+        double doubleNum5=floatNum;
+
+    }
+
     @SuppressWarnings({"divzero", "NumericOverflow"})
     @Test
     void should_judge_special_double_cases() {
@@ -63,19 +111,13 @@ class FloatingTypeTest {
     @SuppressWarnings("unused")
     private boolean isNan(double realNumber) {
         // TODO: please implement the method to pass the test.
-        if (Double.isNaN(realNumber))
-            return true;
-        else
-            return false;
+        return Double.isNaN(realNumber);
     }
 
     @SuppressWarnings("unused")
     private boolean isInfinity(double realNumber) {
         // TODO: please implement the method to pass the test.
-        if (Double.isInfinite(realNumber))
-            return true;
-        else
-            return false;
+        return Double.isInfinite(realNumber);
     }
 
     /*
