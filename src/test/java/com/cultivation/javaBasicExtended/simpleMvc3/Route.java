@@ -33,7 +33,7 @@ class RegexRoute extends Route {
 
     @Override
     public boolean isMatch(String segment) {
-        // TODO: please implement the following method to pass the test
+        // TODO: please implement the following parentStaticMethod to pass the test
         // <--start
         throw new NotImplementedException();
         // --end-->

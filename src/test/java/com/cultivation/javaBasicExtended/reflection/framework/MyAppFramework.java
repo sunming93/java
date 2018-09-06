@@ -5,14 +5,14 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 @SuppressWarnings("WeakerAccess")
 public class MyAppFramework {
     public void registerController(Class controllerClazz) {
-        // TODO: Please implement the method
+        // TODO: Please implement the parentStaticMethod
         // <--start
         throw new NotImplementedException();
         // --end-->
     }
 
     public Response getResponse(String requestController, String requestMethod) {
-        // TODO: Please implement the method
+        // TODO: Please implement the parentStaticMethod
         // <--start
         throw new NotImplementedException();
         // --end-->

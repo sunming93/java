@@ -8,7 +8,7 @@ import java.io.Reader;
 class MyGrep {
     @SuppressWarnings({"WeakerAccess", "unused", "RedundantThrows"})
     public static String[] grep(Reader reader, String pattern) throws IOException {
-        // TODO: please implement the method to pass all the tests.
+        // TODO: please implement the parentStaticMethod to pass all the tests.
         // <--start
         throw new NotImplementedException();
         // --end-->

@@ -5,16 +5,13 @@ import com.cultivation.javaBasic.util.MethodWithAnnotation;
 import com.cultivation.javaBasic.util.MyAnnotation;
 import org.junit.jupiter.api.Test;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ReflectionTest {
     @Test
@@ -63,18 +60,17 @@ class ReflectionTest {
 
         // TODO: please get all public static declared methods of Double. Sorted in an ascending order
         // <--start
-        Method[] methods = doubleClass.getMethods();
-        List<String> publicStaticMethodsNames = new ArrayList<>();
+        Method[] methods = doubleClass.getDeclaredMethods();
+        List<String> publicStaticMethodNames = new ArrayList<>();
 
         for (Method method : methods) {
             int modifiers = method.getModifiers();
 
-            if (Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)) {
-                publicStaticMethodsNames.add(method.getName());
-            }
+            if(Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers))
+                publicStaticMethodNames.add(method.getName());
         }
 
-        String[] publicStaticMethods = publicStaticMethodsNames.toArray(new String[0]);
+        String[] publicStaticMethods = publicStaticMethodNames.toArray(new String[0]);
         Arrays.sort(publicStaticMethods);
         // --end-->
 
@@ -117,23 +113,26 @@ class ReflectionTest {
     @SuppressWarnings({"ConstantConditions", "unused"})
     @Test
     void should_be_able_to_get_the_methods_who_contains_MyAnnotation_annotation() {
-        Class<MethodWithAnnotation> theClass = MethodWithAnnotation.class;
+        Class<MyClassWithMyAnnotation> myClassWithMyAnnotationClass = MyClassWithMyAnnotation.class;
 
-        // TODO: please get the methods who contains MyAnnotation annotation.
-        // <--start
-        Method[] methods = theClass.getMethods();
-        List<String> annotationMethodsNames = new ArrayList<>();
-
-        for (Method method : methods) {
-            if(method.isAnnotationPresent(MyAnnotation.class)) {
-                annotationMethodsNames.add(method.getName());
-            }
+        Method[] methods = myClassWithMyAnnotationClass.getDeclaredMethods();
+        List<String> annotationMethods = new ArrayList<>();
+        for(Method method : methods){
+            if(method.isAnnotationPresent(MyAnnotationsm.class))
+                annotationMethods.add(method.getName());
         }
 
-        String[] methodsContainsAnnotations = annotationMethodsNames.toArray(new String[0]);
-        // --end-->
+        String[] annotationmethodNames = annotationMethods.toArray(new String[0]);
+        assertArrayEquals(new String[]{"myMethod"},annotationmethodNames);
+    }
 
-        assertArrayEquals(new String[] {"theMethod"}, methodsContainsAnnotations);
+    @Test
+    void should_not_be_the_parent() {
+        Student[] students = new Student[0];
+        Person[] people = new Person[0];
+
+        assertTrue(students.getClass().getComponentType().getSuperclass() == people.getClass().getComponentType());
+        assertFalse(students.getClass().getSuperclass()== people.getClass());
     }
 }
 

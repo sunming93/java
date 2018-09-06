@@ -284,8 +284,11 @@ class StringTest {
         // <--start
 //        throw new NotImplementedException();
         int[] codePoints=new int[withSurrogatePairs.codePointCount(0,withSurrogatePairs.length())];
-        for (int i = 0; i < withSurrogatePairs.length(); i++) {
-            codePoints[i]=withSurrogatePairs.codePointAt(i);
+        for (int i = 0,j=0; i < codePoints.length; i++,j++) {
+            if(j < codePoints.length-1 && Character.isSurrogatePair(withSurrogatePairs.charAt(j),withSurrogatePairs.charAt(j+1)))
+                codePoints[i]=Character.toCodePoint(withSurrogatePairs.charAt(j),withSurrogatePairs.charAt(++j));
+            else
+                codePoints[i]=withSurrogatePairs.codePointAt(j);
         }
         return codePoints;
 //        return withSurrogatePairs.codePoints().toArray();

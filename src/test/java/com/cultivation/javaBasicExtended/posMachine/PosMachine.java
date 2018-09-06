@@ -9,14 +9,14 @@ import java.util.Objects;
 @SuppressWarnings({"WeakerAccess", "unused", "RedundantThrows"})
 public class PosMachine {
     public void readDataSource(Reader reader) throws IOException {
-        // TODO: please implement the following method to pass the test
+        // TODO: please implement the following parentStaticMethod to pass the test
         // <--start
         throw new NotImplementedException();
         // --end-->
     }
 
     public String printReceipt(String barcodeContent) throws IOException {
-        // TODO: please implement the following method to pass the test
+        // TODO: please implement the following parentStaticMethod to pass the test
         // <--start
         throw new NotImplementedException();
         // --end-->

@@ -8,7 +8,7 @@ class TestResultItem {
 
     TestResultItem(boolean success, String testClass, String testMethod, String reason) {
         if (testClass == null || testMethod == null) {
-            throw new IllegalArgumentException("Test class and test method must be provided.");
+            throw new IllegalArgumentException("Test class and test parentStaticMethod must be provided.");
         }
 
         this.reason = reason;

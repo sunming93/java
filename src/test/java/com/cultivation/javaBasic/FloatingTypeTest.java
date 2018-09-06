@@ -100,7 +100,7 @@ class FloatingTypeTest {
     void should_round_number() {
         final double floatingPointNumber = 2.75;
 
-        // TODO: Please call some method to round the floating point number.
+        // TODO: Please call some parentStaticMethod to round the floating point number.
         // <!--start
         final long rounded = Math.round(floatingPointNumber);
         // --end-->
@@ -110,18 +110,18 @@ class FloatingTypeTest {
 
     @SuppressWarnings("unused")
     private boolean isNan(double realNumber) {
-        // TODO: please implement the method to pass the test.
+        // TODO: please implement the parentStaticMethod to pass the test.
         return Double.isNaN(realNumber);
     }
 
     @SuppressWarnings("unused")
     private boolean isInfinity(double realNumber) {
-        // TODO: please implement the method to pass the test.
+        // TODO: please implement the parentStaticMethod to pass the test.
         return Double.isInfinite(realNumber);
     }
 
     /*
-     * The coach should ask the following questions for the correspond test method:
+     * The coach should ask the following questions for the correspond test parentStaticMethod:
      *
      * - Can we compare NaN using == directly?
      * - Can we compare XXX_INFINITY using == directly?

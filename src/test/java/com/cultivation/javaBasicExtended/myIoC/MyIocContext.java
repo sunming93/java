@@ -13,7 +13,7 @@ public class MyIocContext {
 
     public void registerBean(Class<?> beanClazz) {
         if (beanClazz == null) throw new IllegalArgumentException();
-        // TODO: please implement the method to register bean class definition.
+        // TODO: please implement the parentStaticMethod to register bean class definition.
         // <--start
         throw new NotImplementedException();
         // --end-->
