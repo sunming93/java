@@ -16,21 +16,26 @@ class Matrix {
     public Matrix(int[][] matrixArray) {
         // TODO: please implement the constructor of a matrix.
         // <--start
-        if(matrixArray == null)
+        if(matrixArray == null){
             throw new IllegalArgumentException("Raw matrix is null");
+        }
 
-        if (matrixArray.length == 0)
+        if (matrixArray.length == 0){
             throw new IllegalArgumentException("Raw matrix contains 0 row");
+        }
 
         for (int i = 0; i < matrixArray.length; i++) {
-            if(matrixArray[i] == null)
+            if(matrixArray[i] == null){
                 throw new IllegalArgumentException("Raw matrix contains null row");
+            }
 
-            if (matrixArray[i].length == 0)
+            if (matrixArray[i].length == 0){
                 throw new IllegalArgumentException("At least one row of raw matrix contains 0 column");
+            }
 
-            if (matrixArray[i].length != matrixArray[0].length)
+            if (matrixArray[i].length != matrixArray[0].length){
                 throw new IllegalArgumentException("Raw matrix is not rectangle");
+            }
         }
 
         storage = matrixArray;
@@ -40,8 +45,9 @@ class Matrix {
     public static Matrix multiply(Matrix left, Matrix right) {
         // TODO: please implement the method to pass the tests.
         // <--start
-        if(left == null || right == null || left.columns() != right.rows())
+        if(left == null || right == null || left.columns() != right.rows()) {
             throw new IllegalArgumentException();
+        }
 
         int[][] product = new int[left.rows()][right.columns()];
 
