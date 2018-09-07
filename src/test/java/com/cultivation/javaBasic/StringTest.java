@@ -283,13 +283,15 @@ class StringTest {
         // TODO: please implement the method to the pass the test
         // <--start
 //        throw new NotImplementedException();
-        int[] codePoints=new int[withSurrogatePairs.codePointCount(0,withSurrogatePairs.length())];
-        for (int i = 0,j=0; i < codePoints.length; i++,j++) {
-            if(j < codePoints.length-1 && Character.isSurrogatePair(withSurrogatePairs.charAt(j),withSurrogatePairs.charAt(j+1)))
-                codePoints[i]=Character.toCodePoint(withSurrogatePairs.charAt(j),withSurrogatePairs.charAt(++j));
-            else
-                codePoints[i]=withSurrogatePairs.codePointAt(j);
+
+        int charLength = withSurrogatePairs.length();
+        int[] codePoints = new int[withSurrogatePairs.codePointCount(0, charLength)];
+
+        for (int charIndex = 0,codePointIndex = 0; charIndex < charLength;) {
+            codePoints[codePointIndex++] = withSurrogatePairs.codePointAt(charIndex);
+            charIndex += Character.charCount(Character.codePointAt(withSurrogatePairs,charIndex));
         }
+
         return codePoints;
 //        return withSurrogatePairs.codePoints().toArray();
         // --end-->

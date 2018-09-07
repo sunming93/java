@@ -16,20 +16,53 @@ class Matrix {
     public Matrix(int[][] matrixArray) {
         // TODO: please implement the constructor of a matrix.
         // <--start
-        throw new NotImplementedException();
+        if(matrixArray == null)
+            throw new IllegalArgumentException("Raw matrix is null");
+
+        if (matrixArray.length == 0)
+            throw new IllegalArgumentException("Raw matrix contains 0 row");
+
+        for (int i = 0; i < matrixArray.length; i++) {
+            if(matrixArray[i] == null)
+                throw new IllegalArgumentException("Raw matrix contains null row");
+
+            if (matrixArray[i].length == 0)
+                throw new IllegalArgumentException("At least one row of raw matrix contains 0 column");
+
+            if (matrixArray[i].length != matrixArray[0].length)
+                throw new IllegalArgumentException("Raw matrix is not rectangle");
+        }
+
+        storage = matrixArray;
         // --end-->
     }
 
     public static Matrix multiply(Matrix left, Matrix right) {
-        // TODO: please implement the parentStaticMethod to pass the tests.
+        // TODO: please implement the method to pass the tests.
         // <--start
-        throw new NotImplementedException();
-        // --end-->
+        if(left == null || right == null || left.columns() != right.rows())
+            throw new IllegalArgumentException();
+
+        int[][] product = new int[left.rows()][right.columns()];
+
+        arrayMultiply(left.storage, right.storage, product);
+
+        return new Matrix(product);
+//         --end-->
     }
 
-    // TODO: you can add some helper parentStaticMethod if you like.
+    // TODO: you can add some helper method if you like.
     // <--start
+    private static void arrayMultiply(int[][] left, int[][] right, int[][] product) {
 
+        for (int rowIndex = 0; rowIndex < left.length; rowIndex++) {
+            for (int colIndex = 0; colIndex < right[0].length; colIndex++) {
+                for (int i = 0; i < left[0].length; i++) {
+                    product[rowIndex][colIndex] += left[rowIndex][i] * right[i][colIndex];
+                }
+            }
+        }
+    }
     // --end->
 
     public int[] getRow(int rowIndex) {

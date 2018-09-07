@@ -1,11 +1,15 @@
 package com.cultivation.javaBasic.showYourIntelligence;
 
+import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Arrays;
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 @SuppressWarnings("unused")
-public class PersonForEquals {
+public class PersonForEquals implements Comparable{
     private final String name;
     private final short yearOfBirth;
 
@@ -50,9 +54,25 @@ public class PersonForEquals {
     public int hashCode() {
         // TODO: please modify the following code to pass the test
         // <--start
-        int result = yearOfBirth;
-        result = 31 * result + name.hashCode();
-        return result;
+//        int result = yearOfBirth;
+//        result = 31 * result + name.hashCode();
+//        return result;
+        return Objects.hash(name,yearOfBirth);
         // --end-->
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        if(obj == null)
+            throw new NullPointerException();
+
+        PersonForEquals that = (PersonForEquals) obj;
+
+        int nameCompare = this.name.compareTo(that.name);
+        if(nameCompare != 0){
+            return nameCompare;
+        }
+
+        return yearOfBirth == that.yearOfBirth ? 0 : (yearOfBirth - that.yearOfBirth > 0 ? 1 : -1);
     }
 }

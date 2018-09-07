@@ -9,7 +9,11 @@ public class NameImpl implements WithName, Person {
     public String getName() {
         // TODO: please modify the following code to pass the test
         // <--start
-        throw new NotImplementedException();
+//        System.out.println(this.getClass().toString());
+//        System.out.println(Person.super.toString());
+//        System.out.println(WithName.super.toString());
+
+        return Person.super.getName();
         // --end-->
     }
 }
