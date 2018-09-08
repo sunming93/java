@@ -137,17 +137,18 @@ class StringTest {
         // TODO: Create string using StringBuilder
         // <--Start
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < height; i++) {
+        for (int rowIndex = 0; rowIndex < height; rowIndex++) {
             builder.append("|");
-            for (int j = 1; j < width - 1; j++) {
-                if(i == 0 || i == height - 1){
+
+            for (int colIndex = 1; colIndex < width - 1; colIndex++) {
+                if(rowIndex == 0 || rowIndex == height - 1){
                     builder.append("-");
                 } else {
                     builder.append(" ");
                 }
             }
-            builder.append("|");
-            builder.append("\n");
+
+            builder.append("|\n");
         }
         // --End-->
 
