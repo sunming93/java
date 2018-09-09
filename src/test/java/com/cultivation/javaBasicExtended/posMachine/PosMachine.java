@@ -1,5 +1,6 @@
 package com.cultivation.javaBasicExtended.posMachine;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -12,28 +13,25 @@ public class PosMachine {
     public static final String LINE_SEPARATOR = System.lineSeparator();
     public static final String SEPARATOR_LINE = "------------------------------------------------------------" + LINE_SEPARATOR;
     public static final String RECEIPTS_TITLE = "Receipts" + LINE_SEPARATOR;
+    public static final String ITEM_FORMAT = "%-32s%-11d%d\n";
     public static final String PRICE = "Price: ";
 
-    Map<Product,Integer> products = new LinkedHashMap<>();
+    Map<String,Product> products = new LinkedHashMap<>();
 
     public void readDataSource(Reader reader) throws IOException {
         // TODO: please implement the following method to pass the test
         // <--start
+
         try {
             char[] readContents = new char[1000];
             reader.read(readContents);
             String contents = String.valueOf(readContents);
 
             ObjectMapper mapper = new ObjectMapper();
-            List<Product> productList = new ArrayList<>();
-            productList = mapper.readValue(contents,productList.getClass());
+            List<Product> productList = mapper.readValue(contents,new TypeReference<List<Product>>(){});
 
-            for(Product product : productList){
-                if(!products.containsKey(product)){
-                    products.put(product,1);
-                }else {
-                    products.put(product,products.get(product)+1);
-                }
+            for (Product product : productList){
+                products.put(product.getId(),product);
             }
         } catch (IOException e){
             reader.close();
@@ -44,7 +42,8 @@ public class PosMachine {
     public String printReceipt(String barcodeContent) throws IOException {
         // TODO: please implement the following method to pass the test
         // <--start
-
+        if(products.size() == 0)
+            throw new IllegalStateException();
 
         StringBuilder sb = new StringBuilder();
         sb.append(RECEIPTS_TITLE)
@@ -58,12 +57,26 @@ public class PosMachine {
             return sb.toString();
         }
 
+        ObjectMapper mapper = new ObjectMapper();
+        List<String> contentIds = mapper.readValue(barcodeContent,new TypeReference<List<String>>(){});
+
+        Map<String,Integer> contents = new LinkedHashMap<>();
+        for(String contentId : contentIds){
+            if(!contents.containsKey(contentId)){
+                contents.put(contentId,1);
+            }else {
+                contents.put(contentId,contents.get(contentId)+1);
+            }
+        }
+
         int totalPrice = 0;
-        for(Product product : products.keySet()){
-            sb.append(product.getName()+"\t\t\t")
-                    .append(product.getPrice()+"\t")
-                    .append(products.get(product));
-            totalPrice += product.getPrice() * products.get(product);
+        for(String contentId : contents.keySet()){
+            Product product = products.get(contentId);
+            Integer quantity = contents.get(contentId);
+
+            sb.append(String.format(ITEM_FORMAT, product.getName(), product.getPrice(), quantity));
+
+            totalPrice += product.getPrice() * quantity;
         }
 
         sb.append(SEPARATOR_LINE)
