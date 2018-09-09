@@ -186,10 +186,10 @@ The instanceof operator compares an object to a specified type. You can use it t
 1. 钻石问题
 
 - #### 钻石问题解决办法
-<Intercace-name>.super.<methodName>
+Intercace-name.super.methodName
 
 - #### 内部类调用外部类的方法
-<class-name>.this.<methodName>
+class-name.this.methodName
 
 - #### Arrays.sort()是根据元素的compareTo()方法的返回值来排序的
 
